@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kedu.dto.MembersDTO;
+import com.kedu.dto.MemberDTO;
 
 @Controller
 @RequestMapping("/member")
@@ -19,14 +19,14 @@ public class MemberController {
 
 	@RequestMapping("/login")
 	public String login(MemberDTO dto, HttpSession session) throws Exception {
-		
-		boolean loginId = dao.login(dto);
-		
-		if(loginId) {
-			session.setAttribute("loginId", loginId);
-			
-		}
-		return "redirect:/";
+
+	    boolean result = dao.login(dto);
+
+	    if(result) {
+	        session.setAttribute("loginId", dto.getId());
+	    }
+
+	    return "redirect:/";
 	}
 	
 	@RequestMapping("/logout")
@@ -62,10 +62,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage(HttpSession session, MemberDTO dto,Model model)throws Exception{
+	public String mypage(HttpSession session, Model model)throws Exception{
 		
 		String loginId = (String) session.getAttribute("loginId");
-		dto = dao.selectMember(loginId);
+		MemberDTO dto = dao.selectMember(loginId);
 		model.addAttribute("dto",dto);
 		return "mypage";
 	}
