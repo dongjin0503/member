@@ -20,7 +20,7 @@ public class MemberDAO {
 	}
 
 	
-	public MemberDTO mypage(String id) {
+	public MemberDTO selectMember(String id) {
 		String sql = "select * from member where id = ?" ;
 		return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(MemberDTO.class), id);
 	}
