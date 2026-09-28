@@ -40,9 +40,9 @@
 }
 
 #mypage-btn {
-	width: 25%;
+	width: 30%;
 	height: 40px;
-	padding: 10px;
+	padding: 5px;
 	margin-top: 10px;
 	background-color: white;
 	border: 1px solid #ccc;
@@ -52,9 +52,9 @@
 }
 
 #logout-btn {
-	width: 25%;
+	width: 30%;
 	height: 40px;
-	padding: 10px;
+	padding: 5px;
 	margin-top: 10px;
 	background-color: white;
 	border: 1px solid #ccc;
@@ -64,9 +64,9 @@
 }
 
 #delete-btn {
-	width: 25%;
+	width: 30%;
 	height: 40px;
-	padding: 10px;
+	padding: 5px;
 	margin-top: 10px;
 	background-color: white;
 	border: 1px solid #ccc;
@@ -148,6 +148,7 @@
 					<button type="button" id="logout-btn"
 						onclick="location.href='/member/logout'">로그아웃</button>
 					<form action="/member/delete" method="post">
+					
 						<button type="submit" id="delete-btn"
 							onclick="return confirm('정말로 탈퇴하시겠습니까?')">회원탈퇴</button>
 					</form>
@@ -172,7 +173,7 @@
 					</div>
 					<button type="submit" id="login-btn">로그인</button>
 				</form>
-				<form action="/member/signup">
+				<form action="/member/signupPage">
 					<button type="submit" id="signup-btn">회원가입</button>
 				</form>
 			</div>

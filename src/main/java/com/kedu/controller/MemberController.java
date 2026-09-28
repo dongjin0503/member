@@ -39,8 +39,8 @@ public class MemberController {
 
     @RequestMapping("/delete")
     public String delete(HttpSession session, MemberDTO dto) throws Exception {
-
-        dao.delete(dto);
+    	String id = (String) session.getAttribute("loginId");
+        dao.delete(id);
         session.invalidate();
 
         return "redirect:/";

@@ -116,7 +116,7 @@ a {
 			<b>마이페이지</b>
 		</div>
 
-		<form action="member/mypage" id = "updateForm" method ="post">
+		<form action="/member/update" id = "updateForm" method ="post">
 
 			<fieldset>
 				<legend>계정정보</legend>

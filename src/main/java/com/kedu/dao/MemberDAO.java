@@ -14,9 +14,16 @@ public class MemberDAO {
 	private JdbcTemplate jdbc;
 
 	public int signup(MemberDTO dto) {
-		String sql = "insert into member values(? , ? , ? , ? , ? , ? , ? , ?)";
+		String sql = "insert into member(id, pw, name, phone, email, zipcode, address1, address2) "
+				+ "values(?,?,?,?,?,?,?,?)";
+		System.out.println(dto.getId());
+		System.out.println(dto.getName());
+		System.out.println(dto.getPhone());
+		
 		return jdbc.update(sql, dto.getId(), dto.getPw(), dto.getName(), dto.getPhone(), dto.getEmail(),
 				dto.getZipcode(), dto.getAddress1(), dto.getAddress2());
+		
+		
 	}
 	
 	public void update(MemberDTO dto, String loginId){
@@ -38,8 +45,8 @@ public class MemberDAO {
 		return result > 0;
 	}
 	
-	public void delete(MemberDTO dto) throws Exception {
-		String sql = "delete from members where id = ?";
-		jdbc.update(sql , dto.getId());
+	public void delete(String id) throws Exception {
+		String sql = "delete from member where id = ?";
+		jdbc.update(sql ,id);
 		}
 }

@@ -34,8 +34,8 @@
 }
 
 .input-box input {
-	height: 30px;
-	width: 100%;
+	height: 20px;
+	width: 80%;
 	padding: 10px;
 	margin-top: 10px;
 	border-radius: 5px;
@@ -69,12 +69,11 @@
 <body>
 <div class=container>
 <div class="signup-title"><strong>회원가입</strong></div>
-	<form action="/member/signupPage" method="post">
+	<form action="/member/signup" method="post">
 	<fieldset>
 		<legend>계정 정보</legend>
 		<div class="input-box">
 			아이디 <input type="text" name="id" id="id" placeholder="아이디 입력">
-			<button type="button" id="idcheck">중복검사</button>
 		</div>
 		<div class="input-box">
 			비밀번호 <input type="text" name="pw" id="pw1" placeholder="영문, 숫자, 특수문자를 포함 8~20자">
@@ -169,10 +168,7 @@
 				id.focus();
 				return false;
 			}
-			if (id.getAttribute("check") != "true") {
-				alert("ID 중복확인을 해주세요.");
-				return false;
-			}
+			
 			if (!pwRegex.test(pw1.value)) {
 				alert("비밀번호는 영문, 숫자, 특수문자를 포함하여 8~20자로 입력하세요.");
 				pw1.focus();
