@@ -18,6 +18,11 @@ public class MemberDAO {
 		return jdbc.update(sql, dto.getId(), dto.getPw(), dto.getName(), dto.getPhone(), dto.getEmail(),
 				dto.getZipcode(), dto.getAddress1(), dto.getAddress2());
 	}
+	
+	public void update(MemberDTO dto, String loginId){
+		String sql = "update member set name=?, phone=?, email=?, zipcode=?, address1=?, address2=? where id=?";
+		jdbc.update(sql, dto.getName(),dto.getPhone(),dto.getEmail(),dto.getZipcode(),dto.getAddress1(),dto.getAddress2(),loginId);
+	}
 
 	
 	public MemberDTO selectMember(String id) {

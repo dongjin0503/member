@@ -76,4 +76,11 @@ public class MemberController {
 
         return "mypage";
     }
+    
+    @RequestMapping("/update")
+    public String update(MemberDTO dto, HttpSession session) throws Exception {
+    	String loginId = (String) session.getAttribute("loginId");
+    	dao.update(dto,loginId);
+    	return "redirect:/member/mypage";
+    }
 }
