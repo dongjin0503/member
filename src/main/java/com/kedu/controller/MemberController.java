@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kedu.dao.MemberDAO;
+import com.kedu.dto.MemberDTO;
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -54,7 +57,7 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(MemberDTO dto,Model model)throws Exception{
 		
-		model.addAttribute("myId",dto.getId);
+		model.addAttribute("myId",dto.getId());
 		return "mypage";
 	}
 }
