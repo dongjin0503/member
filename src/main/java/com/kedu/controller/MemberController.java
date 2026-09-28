@@ -1,3 +1,4 @@
+
 package com.kedu.controller;
 
 import javax.servlet.http.HttpSession;
@@ -7,56 +8,72 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kedu.dao.MemberDAO;
 import com.kedu.dto.MemberDTO;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
-	
-	@Autowired
-	private MemberDAO dao;
 
-	@RequestMapping("/login")
-	public String login(MemberDTO dto, HttpSession session) throws Exception {
-		
-		boolean loginId = dao.login(dto);
-		
-		if(loginId) {
-			session.setAttribute("loginId", loginId);
-			
-		}
-		return "redirect:/";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) throws Exception {
-		session.invalidate();
-		
-		return "/";
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(HttpSession session, MemberDTO dto)throws Exception{
-		
-		session.invalidate();
-		dao.delete(dto);
-		
-		return "redirect:/home";
-	}
-	
-	
-	
-	@RequestMapping("/signup")
-	public String signup() throws Exception{
-		
-		return "signup";
-	}
-	
-	@RequestMapping("/mypage")
-	public String mypage(MemberDTO dto,Model model)throws Exception{
-		
-		model.addAttribute("myId",dto.getId());
-		return "mypage";
-	}
+    @Autowired
+    private MemberDAO dao;
+
+    @RequestMapping("/login")
+    public String login(MemberDTO dto, HttpSession session) throws Exception {
+
+        boolean result = dao.login(dto);
+
+        if(result) {
+            session.setAttribute("loginId", dto.getId());
+        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) throws Exception {
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(HttpSession session, MemberDTO dto) throws Exception {
+
+        dao.delete(dto);
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/signupPage")
+    public String signupPage() throws Exception {
+
+        return "signup";
+    }
+
+    @RequestMapping("/signup")
+    public String signup(MemberDTO dto) throws Exception {
+
+        dao.signup(dto);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/mypage")
+    public String mypage(HttpSession session, Model model) throws Exception {
+
+        String loginId = (String) session.getAttribute("loginId");
+
+        if(loginId == null) {
+            return "redirect:/";
+        }
+
+        MemberDTO dto = dao.selectMember(loginId);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("myId", dto.getId());
+
+        return "mypage";
+    }
 }
